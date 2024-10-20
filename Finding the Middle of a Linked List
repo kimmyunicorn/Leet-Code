@@ -1,0 +1,59 @@
+/******************************************************************************
+
+                            C Programming Language.
+                     Finding the Middle of a Linked List
+                                Mode: Easy
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data; //Holds data of this Node in integers.
+    struct Node* next; //Pointer to the next Node in the linked list. 
+};
+
+//This function is to get the length of the linked list.
+int getLength(struct Node* head){
+    int length = 0; //Initialized length is 0.
+    
+    while(head){
+        length++;
+        head = head->next; //Move to the next Node in the list
+    }
+    return length; //returns the total length of the list.
+}
+
+//This function is to find the middle node of the linked list.
+int getMiddle(struct Node* head){
+    int length = getLength(head); //finding the length of the linked list.
+    int mid_index = length/2; //Traverse until we find the mid point.
+    while (mid_index--) { //decreases mid_index until it becomes 0.
+        head = head->next; //moves to the next Node.
+    }
+    return head->data; //head now points to the middle element
+} 
+
+struct Node* createNode(int x){ //Creates the Node.
+    struct Node* newNode = (struct Node*) malloc(sizeof(struct Node)); //Allocates memory for the new Node.
+    newNode -> data = x; // Set the data of the new node to the given value
+    newNode -> next = NULL;  // Initialize the next pointer to NULL (new node has no next node)
+    return newNode;
+}
+
+int main() {
+//creating a hard coded linked list that will look like this: 10 -> 20 -> 30 -> 40 -> 50 -> 60
+struct Node* head = createNode(10);
+head -> next = createNode(20);
+head -> next -> next = createNode(30);
+head -> next -> next -> next = createNode(40);
+head -> next -> next -> next -> next = createNode(50);
+head -> next -> next -> next -> next -> next = createNode(60);
+
+//print the middle Node
+    printf("%d\n", getMiddle(head));
+
+    return 0;
+}
+
